@@ -1,0 +1,115 @@
+body,
+html {
+  height: 100%;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  align-items: center;
+  font-family: arial;
+  font-size: 12px;
+}
+
+.colours {
+  position: absolute;
+  top: 6em;
+  left: 6em;
+  display: flex;
+  flex-direction: column;
+}
+.colours__labels {
+  display: flex;
+  margin-bottom: 0.5em;
+}
+.colours__labels span {
+  display: block;
+  flex: 2;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.9em;
+  color: white;
+  text-shadow: 0px 0px 4px black;
+}
+.colours__labels span:first-child {
+  flex: 0;
+}
+.colours__inputs {
+  display: flex;
+}
+.colours .jscolor {
+  display: block;
+  border: 0;
+  height: 40px;
+  width: 60px;
+  margin: 0;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+.colours .jscolor:first-child {
+  border-radius: 6px 0 0 6px;
+}
+.couch {
+  width: 2268px;
+  height: 1701px;
+  transform: scale(0.6);
+  position: absolute;
+  top: -350px;
+  left: -400px;
+  transition: 0.25s ease-in-out;
+}
+.couch__overlay, .couch__overlayBelly, .couch__overlayWings, .couch__overlayToes, .couch__overlayCrest, .couch__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.couch__overlay {
+  z-index: 2;
+  fill: #444F96;
+  mix-blend-mode: multiply;
+}
+.couch__overlay.fade {
+  transition: 0.6s ease-in-out;
+}
+.couch__overlayBelly {
+  z-index: 2;
+  fill: #83C9D4;
+  mix-blend-mode: multiply;
+}
+.couch__overlayBelly.fade {
+  transition: 0.6s ease-in-out;
+}
+.couch__overlayWings {
+  z-index: 2;
+  fill: #FFFFFF;
+  mix-blend-mode: multiply;
+}
+.couch__overlayWings.fade {
+  transition: 0.6s ease-in-out;
+}
+.couch__overlayToes {
+  z-index: 2;
+  fill: #E3BEA6;
+  mix-blend-mode: multiply;
+}
+.couch__overlayToes.fade {
+  transition: 0.6s ease-in-out;
+}
+.couch__overlayCrest {
+  z-index: 2;
+  fill: #FFFFFF;
+  mix-blend-mode: multiply;
+}
+.couch__overlayCrest.fade {
+  transition: 0.6s ease-in-out;
+}
+
+.gen-random {
+  background: #222;
+  border: 0;
+  color: white;
+  border-radius: 0 6px 6px 0;
+  border-left: 1px solid white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
