@@ -69,16 +69,33 @@
 
   </div>
   <div class="colours__inputs">
-    <input id="js-color-1" class="jscolor {onFineChange:'updateMain(this)'}" value="444F96">
-    <input id="js-color-2" class="jscolor {onFineChange:'updateBelly(this)'}" value="83C9D4">
-    <input id="js-color-3" class="jscolor {onFineChange:'updateWings(this)'}" value="FFFFFF">
-    <input id="js-color-4" class="jscolor {onFineChange:'updateToes(this)'}" value="E3BEA6">
-    <input id="js-color-5" class="jscolor {onFineChange:'updateCrest(this)'}" value="FFFFFF">
+    <input id="js-color-1" data-jscolor="
+                          {
+                            onChange:'pickerChange(this, \'main\')',
+                            onInput:'pickerInput(this, \'main\')'
+                          }" value="444F96">
+    <input id="js-color-2" data-jscolor="{
+                          onChange:'pickerChange(this, \'belly\')',
+                          onInput:'pickerInput(this, \'belly\')'
+                          }" value="83C9D4">
+    <input id="js-color-3" data-jscolor="{
+                          onChange:'pickerChange(this, \'wings\')',
+                          onInput:'pickerInput(this, \'wings\')'
+                          }" value="FFFFFF">
+    <input id="js-color-4" data-jscolor="{
+                          onChange:'pickerChange(this, \'toes\')',
+                          onInput:'pickerInput(this, \'toes\')'
+                          }" value="E3BEA6">
+    <input id="js-color-5" data-jscolor="{
+                          onChange:'pickerChange(this, \'crest\')',
+                          onInput:'pickerInput(this, \'crest\')'
+                          }" value="FFFFFF">
     <button class="gen-random" onclick="generateRandom()">Generate random</button>
+    <button class="export" onclick="share()">Share</button>
   </div>
 </div>
 <!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.js'></script><script  src="./script.js"></script>
+  <script src="jscolor.js"></script><script  src="./script.js"></script>
 
 </body>
 </html>

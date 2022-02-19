@@ -109,7 +109,17 @@ html {
   background: #222;
   border: 0;
   color: white;
+  border-radius: 0 0px 0px 0;
+  border-left: 1px solid white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.export {
+  background: #222;
+  border: 0;
+  color: white;
   border-radius: 0 6px 6px 0;
   border-left: 1px solid white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
+

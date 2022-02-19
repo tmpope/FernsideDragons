@@ -32,82 +32,45 @@ function updateColorByParam(param) {
 }
 
 function updateColorByName(attribute, color) {
-  function updateAttribute(attribute) {
+  function updateAttribute(attribute, picker) {
     attribute.style.fill = color;
     setTimeout(function(){attribute.classList.remove("fade");}, 700); 
+    if (picker) {
+      picker.jscolor.fromString(color);
+    }
   }
   switch(attribute) {
     case "main":
-      updateAttribute(mainColor);
+      updateAttribute(mainColor, col1);
       break;
     case "belly":
-      updateAttribute(belly);
+      updateAttribute(belly, col2);
       break;
     case "wings":
-      updateAttribute(wings);
+      updateAttribute(wings, col3);
       break;
     case "toes":
-      updateAttribute(toes);
+      updateAttribute(toes, col4);
       break;
     case "crest":
-      updateAttribute(crest);
+      updateAttribute(crest, col5);
       break;
     default:
-      console.log("Attribute not implemented: " + attribute);
-      console.log("Could not set to color: " + color);
+      console.error("Attribute not implemented: " + attribute);
+      console.error("Could not set to color: " + color);
   }
 }
 
 expectedParams = ["main", "belly", "wings", "toes", "crest"];
 expectedParams.forEach(a => updateColorByParam(a));
 
-function updateMain(picker, string) {
-  if (!string) {
-  mainColor.style.fill = picker.toHEXString();
-    } else {
-      // Used when generating random
-      mainColor.style.fill = string;
-     setTimeout(function(){mainColor.classList.remove("fade");}, 700); 
-      
-    }
+function pickerInput(picker, attribute) {
+  let color = picker.toHEXString();
+  updateColorByName(attribute, color);
 }
 
-function updateBelly(picker, string) {
-  if (!string) {
-  belly.style.fill = picker.toHEXString();
-    } else {
-      // Used when generating random
-      belly.style.fill = string;
-     setTimeout(function(){belly.classList.remove("fade");}, 700); 
-    }
-}
-
-function updateWings(picker, string) {
-  if (!string) {
-  wings.style.fill = picker.toHEXString();
-    } else {
-      // Used when generating random
-      wings.style.fill = string;
-     setTimeout(function(){wings.classList.remove("fade");}, 700); 
-    }
-}
-function updateToes(picker, string) {
-  if (!string) {
-  toes.style.fill = picker.toHEXString();
-    } else {
-      // Used when generating random
-      toes.style.fill = string;
-     setTimeout(function(){toes.classList.remove("fade");}, 700); 
-    }
-}
-function updateCrest(picker, string) {
-  if (!string) {
-  crest.style.fill = picker.toHEXString();
-    } else {
-      // Used when generating random
-      crest.style.fill = string;
-     setTimeout(function(){crest.classList.remove("fade");}, 700); 
-    }
+function pickerChange(picker, attribute) {
+  updateUrl(attribute, picker.toHEXString());
 }
 
 function updateBackgroundD(picker, randArray) {
@@ -168,24 +131,13 @@ let grad_2_hex = rgbToHex(grad_2_r, grad_2_g, grad_2_b);
   
 let gradient = [grad_1_hex, grad_2_hex];
   
-  updateMain(null, hex);
-  updateBelly(null, grad_1_hex);
-  updateWings(null, grad_2_hex);
-  updateBackgroundD(null, gradient);
-  updateBackgroundL(null, gradient);
+  updateColorByName("main", hex);
+  updateColorByName("belly", grad_1_hex);
+  updateColorByName("wings", grad_2_hex);
   
     mainColor.classList.add("fade");
     belly.classList.add("fade");
     wings.classList.add("fade");
-  
- document.getElementById('js-color-1')
-    .jscolor.fromString(hex);
-  
- document.getElementById('js-color-2')
-    .jscolor.fromString(grad_1_hex);
-  
-   document.getElementById('js-color-3')
-    .jscolor.fromString(grad_2_hex);
 }
 
 function componentToHex(c) {
@@ -196,3 +148,20 @@ function componentToHex(c) {
 function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
+
+function share() {
+  /* Get the text field */
+  var url = window.location.toString();
+
+  /* Copy the text inside the text field */
+  navigator.clipboard.writeText(url);
+
+  /* Alert the copied text */
+  alert("Copied the text: " + url);
+}
+
+function updateUrl(param, value) {
+  var searchParams = new URLSearchParams(window.location.search);
+  searchParams.set(param, value);
+  window.history.pushState("design", "Dragon!", searchParams.toString());
+};
