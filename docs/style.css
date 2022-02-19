@@ -50,7 +50,7 @@ html {
 .colours .jscolor:first-child {
   border-radius: 6px 0 0 6px;
 }
-.couch {
+.dragon {
   width: 2268px;
   height: 1701px;
   transform: scale(0.6);
@@ -59,49 +59,49 @@ html {
   left: -400px;
   transition: 0.25s ease-in-out;
 }
-.couch__overlay, .couch__overlayBelly, .couch__overlayWings, .couch__overlayToes, .couch__overlayCrest, .couch__img {
+.dragon__overlay, .dragon__overlayBelly, .dragon__overlayWings, .dragon__overlayToes, .dragon__overlayCrest, .dragon__img {
   position: absolute;
   top: 0;
   left: 0;
 }
-.couch__overlay {
+.dragon__overlay {
   z-index: 2;
   fill: #444F96;
   mix-blend-mode: multiply;
 }
-.couch__overlay.fade {
+.dragon__overlay.fade {
   transition: 0.6s ease-in-out;
 }
-.couch__overlayBelly {
+.dragon__overlayBelly {
   z-index: 2;
   fill: #83C9D4;
   mix-blend-mode: multiply;
 }
-.couch__overlayBelly.fade {
+.dragon__overlayBelly.fade {
   transition: 0.6s ease-in-out;
 }
-.couch__overlayWings {
+.dragon__overlayWings {
   z-index: 2;
   fill: #FFFFFF;
   mix-blend-mode: multiply;
 }
-.couch__overlayWings.fade {
+.dragon__overlayWings.fade {
   transition: 0.6s ease-in-out;
 }
-.couch__overlayToes {
+.dragon__overlayToes {
   z-index: 2;
   fill: #E3BEA6;
   mix-blend-mode: multiply;
 }
-.couch__overlayToes.fade {
+.dragon__overlayToes.fade {
   transition: 0.6s ease-in-out;
 }
-.couch__overlayCrest {
+.dragon__overlayCrest {
   z-index: 2;
   fill: #FFFFFF;
   mix-blend-mode: multiply;
 }
-.couch__overlayCrest.fade {
+.dragon__overlayCrest.fade {
   transition: 0.6s ease-in-out;
 }
 
