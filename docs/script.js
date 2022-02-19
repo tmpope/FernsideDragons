@@ -11,6 +11,56 @@ const col3 = document.getElementById("js-color-3");
 const col4 = document.getElementById("js-color-4");
 const col5 = document.getElementById("js-color-5");
 
+function getQueryStringParam(param) {
+  var url = window.location.toString();
+  url.match(/\?(.+)$/);
+  var params = RegExp.$1;
+  params = params.split("&");
+  var queryStringList = {};
+  for(var i = 0; i < params.length; i++) {
+    var tmp = params[i].split("=");
+    queryStringList[tmp[0]] = unescape(tmp[1]);
+  }
+  return queryStringList[param];
+}
+
+function updateColorByParam(param) {
+  let color = getQueryStringParam(param);
+  if (color) {
+    updateColorByName(param, color);
+  }
+}
+
+function updateColorByName(attribute, color) {
+  function updateAttribute(attribute) {
+    attribute.style.fill = color;
+    setTimeout(function(){attribute.classList.remove("fade");}, 700); 
+  }
+  switch(attribute) {
+    case "main":
+      updateAttribute(mainColor);
+      break;
+    case "belly":
+      updateAttribute(belly);
+      break;
+    case "wings":
+      updateAttribute(wings);
+      break;
+    case "toes":
+      updateAttribute(toes);
+      break;
+    case "crest":
+      updateAttribute(crest);
+      break;
+    default:
+      console.log("Attribute not implemented: " + attribute);
+      console.log("Could not set to color: " + color);
+  }
+}
+
+expectedParams = ["main", "belly", "wings", "toes", "crest"];
+expectedParams.forEach(a => updateColorByParam(a));
+
 function updateMain(picker, string) {
   if (!string) {
   mainColor.style.fill = picker.toHEXString();
