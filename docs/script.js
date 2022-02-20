@@ -70,7 +70,7 @@ function pickerInput(picker, attribute) {
 }
 
 function pickerChange(picker, attribute) {
-  updateUrl(attribute, picker.toHEXString());
+  updateUrl(attribute, picker.toHEXString().slice(1,7));
 }
 
 function updateBackgroundD(picker, randArray) {
@@ -163,5 +163,5 @@ function share() {
 function updateUrl(param, value) {
   var searchParams = new URLSearchParams(window.location.search);
   searchParams.set(param, value);
-  window.history.pushState("design", "Dragon!", searchParams.toString());
+  window.history.pushState("design", "Dragon!", '?' + searchParams.toString());
 };
