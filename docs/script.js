@@ -31,11 +31,11 @@ function updateColorByParam(param) {
   }
 }
 
-function updateColorByName(attribute, color) {
-  function updateAttribute(attribute, picker) {
-    attribute.style.fill = color;
-    setTimeout(function(){attribute.classList.remove("fade");}, 700); 
-    if (picker) {
+function updateColorByName(attribute, color, updateQuery) {
+  function updateAttribute(element, picker) {
+    element.style.fill = color;
+    setTimeout(function(){element.classList.remove("fade");}, 700); 
+    if (picker && picker.jscolor) {
       picker.jscolor.fromString(color);
     }
   }
@@ -59,18 +59,17 @@ function updateColorByName(attribute, color) {
       console.error("Attribute not implemented: " + attribute);
       console.error("Could not set to color: " + color);
   }
+  if (updateQuery) {
+    updateUrl(attribute, color.slice(1,7));
+  }
 }
 
 expectedParams = ["main", "belly", "wings", "toes", "crest"];
 expectedParams.forEach(a => updateColorByParam(a));
 
-function pickerInput(picker, attribute) {
+function pickerInput(picker, attribute, updateParams) {
   let color = picker.toHEXString();
-  updateColorByName(attribute, color);
-}
-
-function pickerChange(picker, attribute) {
-  updateUrl(attribute, picker.toHEXString().slice(1,7));
+  updateColorByName(attribute, color, updateParams);
 }
 
 function updateBackgroundD(picker, randArray) {
@@ -131,9 +130,9 @@ let grad_2_hex = rgbToHex(grad_2_r, grad_2_g, grad_2_b);
   
 let gradient = [grad_1_hex, grad_2_hex];
   
-  updateColorByName("main", hex);
-  updateColorByName("belly", grad_1_hex);
-  updateColorByName("wings", grad_2_hex);
+  updateColorByName("main", hex, true);
+  updateColorByName("belly", grad_1_hex, true);
+  updateColorByName("wings", grad_2_hex, true);
   
     mainColor.classList.add("fade");
     belly.classList.add("fade");
