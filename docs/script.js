@@ -79,14 +79,17 @@ function pickerInput(picker, attribute, updateParams) {
 // Generate random
 
 function generateRandom() {
+  let searchParams = new URLSearchParams(window.location.search);
   attributeNames.forEach(name => {
     var red = Math.floor(Math.random() * 256) ;
     var green = Math.floor(Math.random() * 256) ;
     var blue = Math.floor(Math.random() * 256) ;
     let hex = rgbToHex(red, green, blue);
-    updateColorByName(name, hex, true);
+    updateColorByName(name, hex);
+    searchParams.set(name, hex);
     attributes[name].colorElt.classList.add("fade");
   })
+  window.history.pushState("design", "", '?' + searchParams.toString());
 };
 
 function componentToHex(c) {
@@ -95,7 +98,7 @@ function componentToHex(c) {
 }
 
 function rgbToHex(r, g, b) {
-    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    return componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
 function share() {
@@ -110,7 +113,7 @@ function share() {
 }
 
 function updateUrl(param, value) {
-  var searchParams = new URLSearchParams(window.location.search);
+  let searchParams = new URLSearchParams(window.location.search);
   searchParams.set(param, value);
   window.history.pushState("design", "", '?' + searchParams.toString());
 };
