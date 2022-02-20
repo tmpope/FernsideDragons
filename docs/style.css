@@ -37,7 +37,7 @@ html {
 .colours__inputs {
   display: flex;
 }
-.colours .jscolor {
+.colours .jsc {
   display: block;
   border: 0;
   height: 40px;
@@ -47,7 +47,7 @@ html {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   cursor: pointer;
 }
-.colours .jscolor:first-child {
+.colours .jsc:first-child {
   border-radius: 6px 0 0 6px;
 }
 .dragon {

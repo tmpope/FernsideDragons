@@ -11,6 +11,46 @@ const col3 = document.getElementById("js-color-3");
 const col4 = document.getElementById("js-color-4");
 const col5 = document.getElementById("js-color-5");
 
+let attributeNames = ["main", "belly", "wings", "toes", "crest"];
+let attributes = {
+  main:
+  { name: "main",
+    eltName: "js-mainColor",
+    pickerName: "#js-color-1"
+  },
+  belly:
+  { name: "belly",
+    eltName: "js-belly",
+    pickerName: "#js-color-2"
+  },
+  wings:
+  { name: "wings",
+    eltName: "js-wings",
+    pickerName: "#js-color-3"
+  },
+  toes:
+  { name: "toes",
+    eltName: "js-toes",
+    pickerName: "#js-color-4"
+  },
+  crest:
+  { name: "crest",
+    eltName: "js-crest",
+    pickerName: "#js-color-5"
+  },
+}
+
+attributeNames.forEach(name => {
+  att = attributes[name];
+  att.elelemnt = document.getElementById(att.eltName);
+  att.picker = document.getElementById(att.pickerName);
+  att.picker = new JSColor(att.pickerName, {
+  onChange:'pickerInput(this, att.name, true)',
+  onInput:'pickerInput(this, att.name)'
+  });
+  updateColorByParam(name)
+});
+
 function getQueryStringParam(param) {
   var url = window.location.toString();
   url.match(/\?(.+)$/);
@@ -31,7 +71,7 @@ function updateColorByParam(param) {
   }
 }
 
-function updateColorByName(attribute, color, updateQuery) {
+function updateColorByName(name, color, updateQuery) {
   function updateAttribute(element, picker) {
     element.style.fill = color;
     setTimeout(function(){element.classList.remove("fade");}, 700); 
@@ -39,7 +79,7 @@ function updateColorByName(attribute, color, updateQuery) {
       picker.jscolor.fromString(color);
     }
   }
-  switch(attribute) {
+  switch(name) {
     case "main":
       updateAttribute(mainColor, col1);
       break;
@@ -56,16 +96,13 @@ function updateColorByName(attribute, color, updateQuery) {
       updateAttribute(crest, col5);
       break;
     default:
-      console.error("Attribute not implemented: " + attribute);
+      console.error("Attribute not implemented: " + name);
       console.error("Could not set to color: " + color);
   }
   if (updateQuery) {
-    updateUrl(attribute, color.slice(1,7));
+    updateUrl(name, color.slice(1,7));
   }
 }
-
-expectedParams = ["main", "belly", "wings", "toes", "crest"];
-expectedParams.forEach(a => updateColorByParam(a));
 
 function pickerInput(picker, attribute, updateParams) {
   let color = picker.toHEXString();
