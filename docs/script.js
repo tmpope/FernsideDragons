@@ -16,29 +16,36 @@ let attributes = {
   main:
   { name: "main",
     pickerName: "#js-color-1",
-    element: col1,
+    pickerElt: col1,
+    colorElt: mainColor,
   },
   belly:
   { name: "belly",
     pickerName: "#js-color-2",
-    element: col2,
+    pickerElt: col2,
+    colorElt: belly,
   },
   wings:
   { name: "wings",
     pickerName: "#js-color-3",
-    element: col3,
+    pickerElt: col3,
+    colorElt: wings,
   },
   toes:
   { name: "toes",
     pickerName: "#js-color-4",
-    element: col4,
+    pickerElt: col4,
+    colorElt: toes,
   },
   crest:
   { name: "crest",
     pickerName: "#js-color-5",
-    element: col5,
+    pickerElt: col5,
+    colorElt: crest,
   },
 }
+
+let initialSearchParams = new URLSearchParams(window.location.search);
 
 attributeNames.forEach(name => {
   att = attributes[name];
@@ -46,57 +53,18 @@ attributeNames.forEach(name => {
     onChange:'pickerInput(this, "' + att.name + '", true)',
     onInput:'pickerInput(this, "' + att.name + '")'
   });
-  updateColorByParam(name)
+  let paramVal = initialSearchParams.get(name);
+  if (paramVal) {
+    updateColorByName(name, paramVal);
+  }
 });
 
-function getQueryStringParam(param) {
-  var url = window.location.toString();
-  url.match(/\?(.+)$/);
-  var params = RegExp.$1;
-  params = params.split("&");
-  var queryStringList = {};
-  for(var i = 0; i < params.length; i++) {
-    var tmp = params[i].split("=");
-    queryStringList[tmp[0]] = unescape(tmp[1]);
-  }
-  return queryStringList[param];
-}
-
-function updateColorByParam(param) {
-  let color = getQueryStringParam(param);
-  if (color) {
-    updateColorByName(param, color);
-  }
-}
-
 function updateColorByName(name, color, updateQuery) {
-  function updateAttribute(element) {
-    picker = attributes[name].element;
-    element.style.fill = color;
-    setTimeout(function(){element.classList.remove("fade");}, 700); 
-    if (picker && picker.jscolor) {
-      picker.jscolor.fromString(color);
-    }
-  }
-  switch(name) {
-    case "main":
-      updateAttribute(mainColor, attributes["main"].element);
-      break;
-    case "belly":
-      updateAttribute(belly, col2);
-      break;
-    case "wings":
-      updateAttribute(wings, col3);
-      break;
-    case "toes":
-      updateAttribute(toes, col4);
-      break;
-    case "crest":
-      updateAttribute(crest, col5);
-      break;
-    default:
-      console.error("Attribute not implemented: " + name);
-      console.error("Could not set to color: " + color);
+  picker = attributes[name].pickerElt;
+  attributes[name].colorElt.style.fill = color;
+  setTimeout(function(){attributes[name].colorElt.classList.remove("fade");}, 700); 
+  if (picker && picker.jscolor) {
+    picker.jscolor.fromString(color);
   }
   if (updateQuery) {
     updateUrl(name, color.slice(1,7));
@@ -108,72 +76,18 @@ function pickerInput(picker, attribute, updateParams) {
   updateColorByName(attribute, color, updateParams);
 }
 
-function updateBackgroundD(picker, randArray) {
- if (!randArray) {
-  background[0] = picker.toHEXString();
-  } else {
-    background[0] = randArray[0];
-  }
-  body.style.background =
-    "linear-gradient(to right, " +
-    background[0] +
-    " , " +
-    background[1] +
-    " , " +
-    background[0] +
-    ")";
-}
-
-function updateBackgroundL(picker, randArray) {
- if (!randArray) {
-  background[1] = picker.toHEXString();
-  } else {
-    background[1] = randArray[1];
-  }
-  
-  body.style.background =
-    "linear-gradient(to right, " +
-    background[0] +
-    " , " +
-    background[1] +
-    " , " +
-    background[0] +
-    ")";
-}
-
-
 // Generate random
 
-
-
 function generateRandom() {
-// dragon  
-var red = Math.floor(Math.random() * 256) ;
-var green = Math.floor(Math.random() * 256) ;
-var blue = Math.floor(Math.random() * 256) ;
-// Grad 1
-var grad_1_r = Math.floor(Math.random() * 256) ;
-var grad_1_g = Math.floor(Math.random() * 256) ;
-var grad_1_b = Math.floor(Math.random() * 256) ;
-// Grad 2  
-var grad_2_r = grad_1_r >= 206 ? grad_1_r : grad_1_r + 50;
-var grad_2_g = grad_1_g >= 206 ? grad_1_g : grad_1_g + 50;
-var grad_2_b = grad_1_b >= 206 ? grad_1_b : grad_1_b + 50;
-  
-let hex = rgbToHex(red, green, blue);
-let grad_1_hex = rgbToHex(grad_1_r, grad_1_g, grad_1_b);
-let grad_2_hex = rgbToHex(grad_2_r, grad_2_g, grad_2_b);
-  
-let gradient = [grad_1_hex, grad_2_hex];
-  
-  updateColorByName("main", hex, true);
-  updateColorByName("belly", grad_1_hex, true);
-  updateColorByName("wings", grad_2_hex, true);
-  
-    mainColor.classList.add("fade");
-    belly.classList.add("fade");
-    wings.classList.add("fade");
-}
+  attributeNames.forEach(name => {
+    var red = Math.floor(Math.random() * 256) ;
+    var green = Math.floor(Math.random() * 256) ;
+    var blue = Math.floor(Math.random() * 256) ;
+    let hex = rgbToHex(red, green, blue);
+    updateColorByName(name, hex, true);
+    attributes[name].colorElt.classList.add("fade");
+  })
+};
 
 function componentToHex(c) {
     var hex = c.toString(16);
