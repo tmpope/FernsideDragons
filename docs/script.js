@@ -162,5 +162,5 @@ function share() {
 function updateUrl(param, value) {
   var searchParams = new URLSearchParams(window.location.search);
   searchParams.set(param, value);
-  window.history.pushState("design", "Dragon!", '?' + searchParams.toString());
+  window.history.pushState("design", "", '?' + searchParams.toString());
 };
