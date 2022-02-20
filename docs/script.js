@@ -1,4 +1,3 @@
-var background = ["#24243e", "#302b63"];
 const body = document.getElementsByTagName("body")[0];
 const mainColor = document.getElementById("js-mainColor");
 const belly = document.getElementById("js-belly");
@@ -11,8 +10,8 @@ const col3 = document.getElementById("js-color-3");
 const col4 = document.getElementById("js-color-4");
 const col5 = document.getElementById("js-color-5");
 
-let attributeNames = ["main", "belly", "wings", "toes", "crest"];
-let attributes = {
+const attributeNames = ["main", "belly", "wings", "toes", "crest"];
+const attributes = {
   main:
   { name: "main",
     pickerName: "#js-color-1",
@@ -45,7 +44,7 @@ let attributes = {
   },
 }
 
-let initialSearchParams = new URLSearchParams(window.location.search);
+const initialSearchParams = new URLSearchParams(window.location.search);
 
 attributeNames.forEach(name => {
   att = attributes[name];
@@ -53,7 +52,7 @@ attributeNames.forEach(name => {
     onChange:'pickerInput(this, "' + att.name + '", true)',
     onInput:'pickerInput(this, "' + att.name + '")'
   });
-  let paramVal = initialSearchParams.get(name);
+  const paramVal = initialSearchParams.get(name);
   if (paramVal) {
     updateColorByName(name, paramVal);
   }
@@ -72,19 +71,19 @@ function updateColorByName(name, color, updateQuery) {
 }
 
 function pickerInput(picker, attribute, updateParams) {
-  let color = picker.toHEXString();
+  const color = picker.toHEXString();
   updateColorByName(attribute, color, updateParams);
 }
 
 // Generate random
 
 function generateRandom() {
-  let searchParams = new URLSearchParams(window.location.search);
+  const searchParams = new URLSearchParams(window.location.search);
   attributeNames.forEach(name => {
     var red = Math.floor(Math.random() * 256) ;
     var green = Math.floor(Math.random() * 256) ;
     var blue = Math.floor(Math.random() * 256) ;
-    let hex = rgbToHex(red, green, blue);
+    const hex = rgbToHex(red, green, blue);
     updateColorByName(name, hex);
     searchParams.set(name, hex);
     attributes[name].colorElt.classList.add("fade");
@@ -113,7 +112,7 @@ function share() {
 }
 
 function updateUrl(param, value) {
-  let searchParams = new URLSearchParams(window.location.search);
+  const searchParams = new URLSearchParams(window.location.search);
   searchParams.set(param, value);
   window.history.pushState("design", "", '?' + searchParams.toString());
 };
