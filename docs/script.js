@@ -15,23 +15,28 @@ let attributeNames = ["main", "belly", "wings", "toes", "crest"];
 let attributes = {
   main:
   { name: "main",
-    pickerName: "#js-color-1"
+    pickerName: "#js-color-1",
+    element: col1,
   },
   belly:
   { name: "belly",
-    pickerName: "#js-color-2"
+    pickerName: "#js-color-2",
+    element: col2,
   },
   wings:
   { name: "wings",
-    pickerName: "#js-color-3"
+    pickerName: "#js-color-3",
+    element: col3,
   },
   toes:
   { name: "toes",
-    pickerName: "#js-color-4"
+    pickerName: "#js-color-4",
+    element: col4,
   },
   crest:
   { name: "crest",
-    pickerName: "#js-color-5"
+    pickerName: "#js-color-5",
+    element: col5,
   },
 }
 
@@ -65,7 +70,8 @@ function updateColorByParam(param) {
 }
 
 function updateColorByName(name, color, updateQuery) {
-  function updateAttribute(element, picker) {
+  function updateAttribute(element) {
+    picker = attributes[name].element;
     element.style.fill = color;
     setTimeout(function(){element.classList.remove("fade");}, 700); 
     if (picker && picker.jscolor) {
@@ -74,7 +80,7 @@ function updateColorByName(name, color, updateQuery) {
   }
   switch(name) {
     case "main":
-      updateAttribute(mainColor, col1);
+      updateAttribute(mainColor, attributes["main"].element);
       break;
     case "belly":
       updateAttribute(belly, col2);
