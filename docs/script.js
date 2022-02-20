@@ -15,38 +15,31 @@ let attributeNames = ["main", "belly", "wings", "toes", "crest"];
 let attributes = {
   main:
   { name: "main",
-    eltName: "js-mainColor",
     pickerName: "#js-color-1"
   },
   belly:
   { name: "belly",
-    eltName: "js-belly",
     pickerName: "#js-color-2"
   },
   wings:
   { name: "wings",
-    eltName: "js-wings",
     pickerName: "#js-color-3"
   },
   toes:
   { name: "toes",
-    eltName: "js-toes",
     pickerName: "#js-color-4"
   },
   crest:
   { name: "crest",
-    eltName: "js-crest",
     pickerName: "#js-color-5"
   },
 }
 
 attributeNames.forEach(name => {
   att = attributes[name];
-  att.elelemnt = document.getElementById(att.eltName);
-  att.picker = document.getElementById(att.pickerName);
   att.picker = new JSColor(att.pickerName, {
-  onChange:'pickerInput(this, att.name, true)',
-  onInput:'pickerInput(this, att.name)'
+    onChange:'pickerInput(this, "' + att.name + '", true)',
+    onInput:'pickerInput(this, "' + att.name + '")'
   });
   updateColorByParam(name)
 });
