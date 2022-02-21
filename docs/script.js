@@ -17,34 +17,38 @@ const attributes = {
     pickerName: "#js-color-1",
     pickerElt: col1,
     colorElt: mainColor,
+    defaultColor: "444F96",
   },
   belly:
   { name: "belly",
     pickerName: "#js-color-2",
     pickerElt: col2,
     colorElt: belly,
+    defaultColor: "83C9D4",
   },
   wings:
   { name: "wings",
     pickerName: "#js-color-3",
     pickerElt: col3,
     colorElt: wings,
+    defaultColor: "FFFFFF",
   },
   toes:
   { name: "toes",
     pickerName: "#js-color-4",
     pickerElt: col4,
     colorElt: toes,
+    defaultColor: "E3BEA6",
   },
   crest:
   { name: "crest",
     pickerName: "#js-color-5",
     pickerElt: col5,
     colorElt: crest,
+    defaultColor: "FFFFFF",
   },
 }
 
-const initialSearchParams = new URLSearchParams(window.location.search);
 
 attributeNames.forEach(name => {
   att = attributes[name];
@@ -52,11 +56,27 @@ attributeNames.forEach(name => {
     onChange:'pickerInput(this, "' + att.name + '", true)',
     onInput:'pickerInput(this, "' + att.name + '")'
   });
-  const paramVal = initialSearchParams.get(name);
-  if (paramVal) {
-    updateColorByName(name, paramVal);
-  }
 });
+
+setColorsByUrl();
+
+window.addEventListener('popstate', readState);
+
+function setColorsByUrl() {
+  const initialSearchParams = new URLSearchParams(window.location.search);
+  attributeNames.forEach(name => {
+    const paramVal = initialSearchParams.get(name);
+    if (paramVal) {
+      updateColorByName(name, paramVal);
+    } else {
+      updateColorByName(name, attributes[name].defaultColor);
+    }
+  });
+}
+
+function readState (ev) {
+  setColorsByUrl();
+}
 
 function updateColorByName(name, color, updateQuery) {
   picker = attributes[name].pickerElt;
