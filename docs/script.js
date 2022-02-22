@@ -13,35 +13,40 @@ const col5 = document.getElementById("js-color-5");
 const attributeNames = ["main", "belly", "wings", "toes", "crest"];
 const attributes = {
   main:
-  { name: "main",
+  { 
+    name: "main",
     pickerName: "#js-color-1",
     pickerElt: col1,
     colorElt: mainColor,
     defaultColor: "444F96",
   },
   belly:
-  { name: "belly",
+  { 
+    name: "belly",
     pickerName: "#js-color-2",
     pickerElt: col2,
     colorElt: belly,
     defaultColor: "83C9D4",
   },
   wings:
-  { name: "wings",
+  { 
+    name: "wings",
     pickerName: "#js-color-3",
     pickerElt: col3,
     colorElt: wings,
     defaultColor: "FFFFFF",
   },
   toes:
-  { name: "toes",
+  { 
+    name: "toes",
     pickerName: "#js-color-4",
     pickerElt: col4,
     colorElt: toes,
     defaultColor: "E3BEA6",
   },
   crest:
-  { name: "crest",
+  { 
+    name: "crest",
     pickerName: "#js-color-5",
     pickerElt: col5,
     colorElt: crest,
@@ -78,21 +83,21 @@ function readState (ev) {
   setColorsByUrl();
 }
 
-function updateColorByName(name, color, updateQuery) {
+function updateColorByName(name, color, save) {
   picker = attributes[name].pickerElt;
-  attributes[name].colorElt.style.fill = color;
+  attributes[name].colorElt.style.fill = '#' + color;
   setTimeout(function(){attributes[name].colorElt.classList.remove("fade");}, 700); 
   if (picker && picker.jscolor) {
     picker.jscolor.fromString(color);
   }
-  if (updateQuery) {
+  if (save) {
     updateUrl(name, color.slice(1,7));
   }
 }
 
-function pickerInput(picker, attribute, updateParams) {
+function pickerInput(picker, attribute, save) {
   const color = picker.toHEXString();
-  updateColorByName(attribute, color, updateParams);
+  updateColorByName(attribute, color, save);
 }
 
 // Generate random
