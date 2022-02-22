@@ -18,7 +18,7 @@ const attributes = {
     pickerName: "#js-color-1",
     pickerElt: col1,
     colorElt: mainColor,
-    defaultColor: "444F96",
+    defaultColor: "#444F96",
   },
   belly:
   { 
@@ -26,7 +26,7 @@ const attributes = {
     pickerName: "#js-color-2",
     pickerElt: col2,
     colorElt: belly,
-    defaultColor: "83C9D4",
+    defaultColor: "#83C9D4",
   },
   wings:
   { 
@@ -34,7 +34,7 @@ const attributes = {
     pickerName: "#js-color-3",
     pickerElt: col3,
     colorElt: wings,
-    defaultColor: "FFFFFF",
+    defaultColor: "#FFFFFF",
   },
   toes:
   { 
@@ -42,7 +42,7 @@ const attributes = {
     pickerName: "#js-color-4",
     pickerElt: col4,
     colorElt: toes,
-    defaultColor: "E3BEA6",
+    defaultColor: "#E3BEA6",
   },
   crest:
   { 
@@ -50,7 +50,7 @@ const attributes = {
     pickerName: "#js-color-5",
     pickerElt: col5,
     colorElt: crest,
-    defaultColor: "FFFFFF",
+    defaultColor: "#FFFFFF",
   },
 }
 
@@ -72,7 +72,7 @@ function setColorsByUrl() {
   attributeNames.forEach(name => {
     const paramVal = initialSearchParams.get(name);
     if (paramVal) {
-      updateColorByName(name, paramVal);
+      updateColorByName(name, '#' + paramVal);
     } else {
       updateColorByName(name, attributes[name].defaultColor);
     }
@@ -85,7 +85,7 @@ function readState (ev) {
 
 function updateColorByName(name, color, save) {
   picker = attributes[name].pickerElt;
-  attributes[name].colorElt.style.fill = '#' + color;
+  attributes[name].colorElt.style.fill = color;
   setTimeout(function(){attributes[name].colorElt.classList.remove("fade");}, 700); 
   if (picker && picker.jscolor) {
     picker.jscolor.fromString(color);
@@ -108,7 +108,7 @@ function generateRandom() {
     var red = Math.floor(Math.random() * 256) ;
     var green = Math.floor(Math.random() * 256) ;
     var blue = Math.floor(Math.random() * 256) ;
-    const hex = rgbToHex(red, green, blue);
+    const hex = '#' + rgbToHex(red, green, blue);
     updateColorByName(name, hex);
     searchParams.set(name, hex);
     attributes[name].colorElt.classList.add("fade");
