@@ -108,8 +108,8 @@ function generateRandom() {
     var red = Math.floor(Math.random() * 256) ;
     var green = Math.floor(Math.random() * 256) ;
     var blue = Math.floor(Math.random() * 256) ;
-    const hex = '#' + rgbToHex(red, green, blue);
-    updateColorByName(name, hex);
+    const hex = rgbToHex(red, green, blue);
+    updateColorByName(name, '#' + hex);
     searchParams.set(name, hex);
     attributes[name].colorElt.classList.add("fade");
   })
